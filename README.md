@@ -2,14 +2,18 @@
 Facial segmentation with a mobile_Unet neural network. The ipynb contains the code used for this experiment. 
 
 ## 1. Data Set
-The data set chosen for the training is the 'human faces' from kaggle. For each image we need to create a mask with the facial region, I have also marked the iris in each mask, as shown in the figure.
+The data set chosen for the training is the 'human faces' from kaggle (https://www.kaggle.com/datasets/ashwingupta3012/human-faces). For each image we need to create a mask with the facial region. To be possible to retreave the position of eyes/iris I have also icluded that is the masks, as shown in the figure.
 
 <p align="center">
 <img src="https://github.com/brunolhc/facial-segmentation-from-scratch/assets/106080016/cc8f3997-2241-45d9-90b2-1880abcfd943" height="400" />
 </p>
 
-## 2. Training
-After processing the images and their masks, we can use them to train our network. In the definition of the mobile_Unet, we can choose a squared image shape as 2^n, where n = 5, 6, 7, 8, 9, ... Inclising the image dimension means more precision and more computational time to train. For this experiment, I have defined a 256x256 input mobile_Unet, therefore, all images need to be redimensioned to that shape.
+After the creation of the masks, I converted the images to gray scale, since I only interested in shapes, not colours. Doing this the number of channels of each image are reduced from three to one, the dimention are reduced from hight x width x 3 to hight x width. 
+
+## 2. Training 
+After processing the images and their masks, we can use them to train our network. In the definition of the mobile_Unet, we can choose a squared image shape as 2^n, where n = 5, 6, 7, 8, 9, ... Incrising the image dimension means more precision, but also more computational time to train. In this case, I choose a 256x256 dimension, therefore, all images need to be redimensioned to that shape.
+
+This shape also determine the layers that will be used to make the encoders, bridge and decoders of the U-net. In this case we have the 
 
 Also, since I am only interested in shapes, not in colors, all the images will be converted to gray. A training image with its mask is given below.
 
