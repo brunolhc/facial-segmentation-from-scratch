@@ -1,5 +1,5 @@
 # Facial Segmentation From Scratch
-Facial segmentation with a mobile_Unet neural network. The ipynb contains the code used for this experiment. 
+Facial segmentation with a U-net using a pretreined mobilenet as encoder. The ipynb contains the code used for this experiment. 
 
 ## 1. Data Set
 The data set chosen for the training is the 'human faces' from kaggle (https://www.kaggle.com/datasets/ashwingupta3012/human-faces). For each image we need to create a mask with the facial region. To be possible to retreave the position of eyes/iris I have also icluded that is the masks, as shown in the figure.
@@ -13,9 +13,9 @@ After the creation of the masks, I converted the images to gray scale, since I o
 ## 2. Training 
 After processing the images and their masks, we can use them to train our network. In the definition of the mobile_Unet, we can choose a squared image shape as 2^n, where n = 5, 6, 7, 8, 9, ... Incrising the image dimension means more precision, but also more computational time to train. In this case, I choose a 256x256 dimension, therefore, all images need to be redimensioned to that shape.
 
-This shape also determine the layers that will be used to make the encoders, bridge and decoders of the U-net. In this case we have the 
+The input shape also influences the choice of layers that will be used to make the decoders of the U-net. In this case we use the layers "input", "block_1_expand_relu", "block_3_expand_relu", "block_6_expand_relu" and "block_13_expand_relu" to build the decoders blocks of the U-net.
 
-Also, since I am only interested in shapes, not in colors, all the images will be converted to gray. A training image with its mask is given below.
+The sigmoid activation function was used to generate the output, since the output mask has only one class. A training image with its mask is given below.
 
 <p align="center">
 <img src="https://github.com/brunolhc/facial-segmentation-from-scratch/assets/106080016/acb570fc-76d2-458e-8856-a83e2572c242" height="400" />
